@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Button, Menu } from 'antd';
+import { useNavigate } from "react-router-dom"
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -30,15 +31,16 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-    getItem('Моя страница', '1', <UserOutlined />),
-    getItem('Новости', '2', <CalendarOutlined />),
-    getItem('Сообщения', '3', <MessageOutlined />),
-    getItem('Друзья', '4', <TeamOutlined />),
-    getItem('Музыка', '5', <PlayCircleOutlined />)];
+    getItem('Моя страница', '/app/profile', <UserOutlined />),
+    getItem('Новости', '/app/news', <CalendarOutlined />),
+    getItem('Сообщения', '/app/messages', <MessageOutlined />),
+    getItem('Друзья', '/app/friends', <TeamOutlined />),
+    getItem('Музыка', '/app/music', <PlayCircleOutlined />)];
 
 
 function Navbar() {
     const [collapsed, setCollapsed] = useState(false);
+    const navigate = useNavigate()
 
     const toggleCollapsed = () => {
         setCollapsed(!collapsed);
@@ -55,6 +57,7 @@ function Navbar() {
                 inlineCollapsed={collapsed}
                 items={items}
                 style={{ background: "#25292C" }}
+                onClick={(event)=>(navigate(event.key))}
             />
         </div>
     )
