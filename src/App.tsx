@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import ErrorPage from './ErrorPage';
 import LoadingPage from './LoadingPage';
 import { useAuthMeQuery, useRegistrationMutation } from './redux/backend/api';
+import RegistrationPage from './Login/RegistrationPage';
 
 function App() {
   const { isLoading, isError, data } = useAuthMeQuery(null)
@@ -29,6 +30,7 @@ function App() {
       {isLoading ? <LoadingPage/> : <Routes>
         <Route path="/" element={<Navigate to="/app"></Navigate>} />
         <Route path="/error" element={<ErrorPage/>}/>
+        <Route path='/registration' element={<RegistrationPage/>} />
         <Route path='/login' element={<LoginPage/>} />
         <Route path='/app/*' element={<MainApp></MainApp>} />
       </Routes>}

@@ -5,33 +5,33 @@ import logoForm from '../assets/images/logo512.png'
 import { useAutorisationMutation, useRegistrationMutation } from '../redux/backend/api';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AutoRequest } from '../models/models';
+import {RegRequest } from '../models/models';
 
 const { Title } = Typography;
 const { Header, Content, Footer } = Layout;
 
-function LoginPage() {
-    const [autorisation, auto] = useAutorisationMutation()
+function RegistrationPage() {
+    const [registration, reg] = useRegistrationMutation()
     const [messageApi, contextHolder] = message.useMessage();
     const navigate = useNavigate()
 
     useEffect(() => {
 
-        if (auto.isSuccess && auto.data.error.error_code == 0) {
-            navigate("/app/profile")
+        if (reg.isSuccess && reg.data.error.error_code == 0) {
+            navigate("/login")
         }
 
-        if (auto.isSuccess && auto.data.error.error_code != 0) {
+        if (reg.isSuccess && reg.data.error.error_code != 0) {
             messageApi.open({
                 type: 'error',
-                content: auto.data.error.err_messages
+                content: reg.data.error.err_messages
             });
         }
-        
-    }, [auto.isSuccess])
 
-    const autoSubmit = async (formData:AutoRequest) => {
-        await autorisation(formData)
+    }, [reg.isSuccess])
+
+    const regSubmit = async (formData:RegRequest) => {
+        await registration(formData)
     }
 
     return (
@@ -58,7 +58,7 @@ function LoginPage() {
                             <div className='flex justify-center '>
                                 <div className=' bg-gray-600 rounded-3xl w-3/4 flex justify-center shadow-lg shadow-cyan-400 '>
                                     <div className='w-3/4 h-fit '>
-                                        <LoginForm formType='auth' authFunction={autoSubmit}></LoginForm>
+                                        <LoginForm formType='reg' regFunction={regSubmit}></LoginForm>
                                     </div>
                                 </div>
                             </div>
@@ -67,10 +67,10 @@ function LoginPage() {
                                 <div className=' bg-gray-600 rounded-3xl w-3/4 flex justify-center shadow-lg shadow-cyan-400'>
                                     <div className='w-3/4 h-fit flex flex-col'>
                                         <div className='mt-2 flex justify-center'>
-                                            <Title level={5} className='h-fit'>Еще нет аккаунта?</Title>
+                                            <Title level={5} className='h-fit'>Уже зарегистрированы?</Title>
                                         </div>
-                                        <button onClick={()=>(navigate("/registration"))} className="w-full rounded-xl bg-green-500 h-10 mb-5 shadow-lg transition delay-60 duration-500 hover:shadow-green-300">
-                                            Регистрация
+                                        <button onClick={()=>(navigate("/login"))} className="w-full rounded-xl bg-green-500 h-10 mb-5 shadow-lg transition delay-60 duration-500 hover:shadow-green-300">
+                                            Вход
                                         </button>
                                     </div>
                                 </div>
@@ -91,4 +91,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage
+export default RegistrationPage

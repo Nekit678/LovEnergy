@@ -7,7 +7,7 @@ export const serverApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: "http://localhost:5000/"
     }),
-    
+    tagTypes:["Auth"],
     endpoints: build => ({
         authMe: build.query<ServerResponse<AuthMeData>, null>({
             query: () => ({
