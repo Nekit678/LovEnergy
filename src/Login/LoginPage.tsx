@@ -2,19 +2,27 @@ import { Button, Image, Layout, Typography } from 'antd';
 import LoginForm from './LoginForm';
 import logo from '../assets/images/logo.png'
 import logoForm from '../assets/images/logo512.png'
+import { useAutorisationMutation, useRegistrationMutation } from '../redux/backend/api';
+
 
 
 const { Title } = Typography;
 
 const { Header, Content, Footer } = Layout;
 function LoginPage() {
+    const [autorisation, auto] = useAutorisationMutation()
+
+    const test = async() => {
+        await autorisation({login: "JustLena", password: "123456", remember: false})
+    }
+
     return (
         <div className='flex min-h-screen'>
             <Layout className="layout" style={{ background: "#25292C" }}>
                 <Header style={{ background: "#4B5563", position: 'sticky', top: 0, zIndex: 1, width: '100%', height: '70px' }}>
                     <div className='flex items-center shrink-0'>
                         <img src={logoForm} className='w-16 shrink-0'></img>
-                        <Title level={2} type='secondary' className='mt-2 ml-3 shrink-0'>LoveEnergy</Title>
+                        <Title level={2} type='secondary' className='mt-2 ml-3 shrink-0'>LovEnergy</Title>
                     </div>
 
                 </Header>
@@ -22,9 +30,12 @@ function LoginPage() {
                 <Content className='mt-5'>
                     <div className="flex justify-center flex-wrap">
 
-                        <div className="flex justify-center items-center">
+
+                        <div className="flex justify-center items-center animate-pulse">
                             <img src={logo} className='w-2/3 h-2/3'></img>
                         </div>
+
+
 
                         <div className='flex flex-col'>
 
@@ -42,7 +53,7 @@ function LoginPage() {
                                         <div className='mt-2 flex justify-center'>
                                             <Title level={5} className='h-fit'>Еще нет аккаунта?</Title>
                                         </div>
-                                        <button className="w-full rounded-xl bg-green-500 h-10 mb-5 shadow-lg transition delay-60 duration-500 hover:shadow-green-300">
+                                        <button onClick={()=>(test())} className="w-full rounded-xl bg-green-500 h-10 mb-5 shadow-lg transition delay-60 duration-500 hover:shadow-green-300">
                                             Регистрация
                                         </button>
                                     </div>
