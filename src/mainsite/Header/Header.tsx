@@ -3,6 +3,7 @@ import logoForm from '../../assets/images/logo512.png'
 import { BellOutlined } from '@ant-design/icons';
 import { DownOutlined, SmileOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
+import React from "react";
 
 const { Title } = Typography;
 
@@ -41,7 +42,7 @@ const items: MenuProps['items'] = [
     },
 ];
 
-function Header() {
+const Header = React.memo((props) => {
     return (
         <div className="flex justify-around shrink-0" style={{ background: "#4B5563" }}>
 
@@ -66,7 +67,7 @@ function Header() {
                 </div>
             </Dropdown>
         </div>
-    )
-}
+    );
+})
 // overlayClassName="w-10" dropdownRender={(menu)=>(<Header/>)}
 export default Header

@@ -26,7 +26,7 @@ function MainApp() {
                 <div className=' bg-orange-300 basis-full' style={{ background: "#25292C" }}>
                     <Routes>
                         <Route path="/" element={<Navigate to="/app/profile"></Navigate>} />
-                        <Route path='/profile' element={<Profile />} />
+                        <Route path='/profile/*' element={<Profile />} />
                     </Routes>
                 </div>
             </div>
