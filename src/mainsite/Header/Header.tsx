@@ -1,7 +1,7 @@
 import { Avatar, Badge, Dropdown, Typography } from "antd";
 import logoForm from '../../assets/images/logo512.png'
 import { BellOutlined } from '@ant-design/icons';
-import { DownOutlined, SmileOutlined } from '@ant-design/icons';
+import { SmileOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import React from "react";
 
@@ -44,26 +44,28 @@ const items: MenuProps['items'] = [
 
 const Header = React.memo((props) => {
     return (
-        <div className="flex justify-around shrink-0" style={{ background: "#4B5563" }}>
+        <div className="flex justify-around" style={{ background: "#4B5563" }}>
 
             {/* Лого */}
             <div className='flex items-center'>
                 <img src={logoForm} className='w-12'></img>
-                <Title level={3} type='secondary' className='mt-2 ml-3 shrink-0'>LoveEnergy</Title>
+                <Title level={3} type='secondary' className='mt-2 ml-3'>LoveEnergy</Title>
             </div>
 
             {/* Оповещалка */}
-            <div className="shrink-0">
-                <BellOutlined className="mt-1 text-2xl text-gray-200 " />
-                <Badge count={5} size="small" className="mb-4 -ml-2">
-                </Badge>
-            </div>
+            <Dropdown trigger={["click"]} menu={{ items }} className="cursor-pointer h-10 rounded-2xl transition duration-300 hover:bg-slate-400">
+                <div>
+                    <BellOutlined className="mt-1 text-2xl text-gray-200 " />
+                    <Badge count={5} size="small" className="mb-4 -ml-2">
+                    </Badge>
+                </div>
+            </Dropdown>
 
             {/* Менюшка */}
-            <Dropdown trigger={["click"]} menu={{ items }} className="cursor-pointer h-10 rounded-2xl transition duration-300 hover:bg-slate-400">
-                <div className="flex">
-                    <Title level={5} type='secondary' className='mt-2 shrink-0'>JustLena</Title>
-                    <Avatar size={35} className="mt-1 ml-2" src={<img src="https://i.pinimg.com/originals/95/76/72/95767226c54f7659f0ac6738117c408c.jpg"></img>}></Avatar>
+            <Dropdown trigger={["click"]} menu={{ items }} className="flex cursor-pointer mt-2 rounded-2xl transition duration-300 hover:bg-slate-400">
+                <div className="flex gap-2 m-2">
+                    <Title level={5} type='secondary' className=''>JustLena</Title>
+                    <Avatar size={35} className="" src={<img src="https://i.pinimg.com/originals/95/76/72/95767226c54f7659f0ac6738117c408c.jpg"></img>}></Avatar>
                 </div>
             </Dropdown>
         </div>

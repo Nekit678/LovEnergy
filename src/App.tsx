@@ -1,12 +1,11 @@
 import LoginPage from './Login/LoginPage';
 import MainApp from './MainApp';
-import Header from './mainsite/Header/Header';
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom"
 
 import { useEffect } from 'react';
 import ErrorPage from './ErrorPage';
 import LoadingPage from './LoadingPage';
-import { useAuthMeQuery, useRegistrationMutation } from './redux/backend/api';
+import { useAuthMeQuery} from './redux/backend/api';
 import RegistrationPage from './Login/RegistrationPage';
 
 function App() {
@@ -14,10 +13,10 @@ function App() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (data?.error.error_code == 1) {
+    if (data?.error.error_code === 1) {
       navigate("/login")
     }
-    if (data?.error.error_code == 0) {
+    if (data?.error.error_code === 0) {
       navigate("/")
     }
     if (isError){

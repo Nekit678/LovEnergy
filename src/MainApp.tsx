@@ -32,9 +32,12 @@ function MainApp() {
             </div>
 
             {/* Footer */}
-            <div className='basis-full bg-blue-500'>Footer</div>
+            <div className='text-center mt-10 text-gray-500'>
+                LOVENERGY ©2023 Created by JustLena
+            </div>
 
         </div>
+
     )
 }
 

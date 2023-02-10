@@ -1,8 +1,8 @@
-import { Button, Image, Layout, Typography, message } from 'antd';
+import { Layout, Typography, message } from 'antd';
 import LoginForm from './LoginForm';
 import logo from '../assets/images/logo.png'
 import logoForm from '../assets/images/logo512.png'
-import { useAutorisationMutation, useRegistrationMutation } from '../redux/backend/api';
+import { useRegistrationMutation } from '../redux/backend/api';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {RegRequest } from '../models/models';
@@ -17,11 +17,11 @@ function RegistrationPage() {
 
     useEffect(() => {
 
-        if (reg.isSuccess && reg.data.error.error_code == 0) {
+        if (reg.isSuccess && reg.data.error.error_code === 0) {
             navigate("/login")
         }
 
-        if (reg.isSuccess && reg.data.error.error_code != 0) {
+        if (reg.isSuccess && reg.data.error.error_code !== 0) {
             messageApi.open({
                 type: 'error',
                 content: reg.data.error.err_messages
@@ -58,7 +58,7 @@ function RegistrationPage() {
                             <div className='flex justify-center '>
                                 <div className=' bg-gray-600 rounded-3xl w-3/4 flex justify-center shadow-lg shadow-cyan-400 '>
                                     <div className='w-3/4 h-fit '>
-                                        <LoginForm formType='reg' regFunction={regSubmit}></LoginForm>
+                                        <LoginForm formType='reg' isLoading={reg.isLoading} regFunction={regSubmit}></LoginForm>
                                     </div>
                                 </div>
                             </div>

@@ -1,9 +1,10 @@
-
 import ProfilePhoto from "./ProfilePhoto"
 import ProfileFriends from "./ProfileFriends/ProfileFriends"
 import ProfileInfo from "./ProfileInfo"
 import PhotoLine from "./PhotoLine"
 import ProfilePosts from "./ProfilePosts/ProfilePosts"
+
+
 
 function Profile() {
     return (
@@ -11,13 +12,25 @@ function Profile() {
 
             <div className="col-span-3">
                 <ProfilePhoto></ProfilePhoto>
-                <ProfileFriends friends={[{name: "Lena", userId: 10, imgUrl: 'https://i.pinimg.com/originals/95/76/72/95767226c54f7659f0ac6738117c408c.jpg'},
-                {name: "Lena", userId: 11, imgUrl: 'https://i.pinimg.com/originals/95/76/72/95767226c54f7659f0ac6738117c408c.jpg'}]}></ProfileFriends>
+
+                <ProfileFriends friends={[{ name: "Lena", userId: 10, imgUrl: 'https://i.pinimg.com/originals/95/76/72/95767226c54f7659f0ac6738117c408c.jpg' },
+                { name: "Lena", userId: 11, imgUrl: 'https://i.pinimg.com/originals/95/76/72/95767226c54f7659f0ac6738117c408c.jpg' }]}></ProfileFriends>
             </div>
 
             <div className="col-start-4 col-span-7 ml-10 ">
-                <ProfileInfo></ProfileInfo>
+                <ProfileInfo
+                    name="Just"
+                    lastname="Lena"
+                    status={true}
+                    textStatus="Hello World!"
+                    city="TEST"
+                    date="11.11.1111"
+                    followCount={200}
+                    frCount={200}
+                    photoCount={200} />
+
                 <PhotoLine></PhotoLine>
+                
                 <ProfilePosts></ProfilePosts>
             </div>
 
