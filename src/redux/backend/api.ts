@@ -32,9 +32,16 @@ export const serverApi = createApi({
                 body:data,
                 credentials: "include"
             })
+        }),
+        logout: build.mutation<ServerResponse<null>, null>({
+            query: () => ({
+                url: 'Logout',
+                method: 'DELETE',
+                credentials: "include"
+            })
         })
     })
 })
 
 
-export const { useAuthMeQuery, useRegistrationMutation, useAutorisationMutation } = serverApi
+export const { useAuthMeQuery, useLogoutMutation, useRegistrationMutation, useAutorisationMutation } = serverApi

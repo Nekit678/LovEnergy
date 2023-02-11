@@ -1,48 +1,46 @@
 import { Avatar, Badge, Dropdown, Typography } from "antd";
 import logoForm from '../../assets/images/logo512.png'
 import { BellOutlined } from '@ant-design/icons';
-import { SmileOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import React from "react";
+import React, { useEffect } from "react";
+import { useLogoutMutation } from "../../redux/backend/api";
+import { useNavigate } from 'react-router-dom';
 
 const { Title } = Typography;
 
-const items: MenuProps['items'] = [
-    {
-        key: '1',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                1st menu item
-            </a>
-        ),
-    },
-    {
-        key: '2',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-                2nd menu item (disabled)
-            </a>
-        ),
-        icon: <SmileOutlined />,
-        disabled: true,
-    },
-    {
-        key: '3',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-                3rd menu item (disabled)
-            </a>
-        ),
-        disabled: true,
-    },
-    {
-        key: '4',
-        danger: true,
-        label: 'a danger item',
-    },
-];
 
-const Header = React.memo((props) => {
+const DropDownUser = ({ logout }: { logout: () => (Promise<void>) }) => {
+    return (
+        <div className="w-36 h-fit bg-gray-400 rounded-xl shadow-lg">
+            <div className="flex flex-col gap-1 items-center">
+                <button className="bg-gray-300 mt-1 w-3/4 hover:scale-110 active:scale-100 hover:bg-zinc-500 h-8 rounded-xl ">Something</button>
+                <button onClick={() => (logout())} className="bg-red-600 mt-1 mb-1 w-3/4 hover:scale-110 active:scale-100 hover:bg-red-700 h-8 rounded-xl text-gray-300 font-bold">Выйти</button>
+            </div>
+        </div>
+    )
+}
+
+const DropDownNotify = () => {
+    return (<div>
+edfafdgafdg
+    </div>)
+}
+
+const Header = React.memo(() => {
+    const [logReq, log] = useLogoutMutation()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+
+        if (log.isSuccess && log.data.error.error_code === 0) {
+            navigate("/login")
+        }
+
+    }, [log.isSuccess])
+
+    const logout = async () => {
+        await logReq(null)
+    }
+
     return (
         <div className="flex justify-around" style={{ background: "#4B5563" }}>
 
@@ -53,7 +51,7 @@ const Header = React.memo((props) => {
             </div>
 
             {/* Оповещалка */}
-            <Dropdown trigger={["click"]} menu={{ items }} className="cursor-pointer h-10 rounded-2xl transition duration-300 hover:bg-slate-400">
+            <Dropdown placement="bottom" trigger={["click"]} dropdownRender={()=>(<DropDownNotify/>)} className="cursor-pointer h-10 rounded-2xl transition duration-300 hover:bg-slate-400">
                 <div>
                     <BellOutlined className="mt-1 text-2xl text-gray-200 " />
                     <Badge count={5} size="small" className="mb-4 -ml-2">
@@ -62,7 +60,7 @@ const Header = React.memo((props) => {
             </Dropdown>
 
             {/* Менюшка */}
-            <Dropdown trigger={["click"]} menu={{ items }} className="flex cursor-pointer mt-2 rounded-2xl transition duration-300 hover:bg-slate-400">
+            <Dropdown placement="bottom" trigger={["click"]} dropdownRender={() => (<DropDownUser logout={logout} />)} className="flex cursor-pointer mt-2 rounded-2xl transition duration-300 hover:bg-slate-400">
                 <div className="flex gap-2 m-2">
                     <Title level={5} type='secondary' className=''>JustLena</Title>
                     <Avatar size={35} className="" src={<img src="https://i.pinimg.com/originals/95/76/72/95767226c54f7659f0ac6738117c408c.jpg"></img>}></Avatar>

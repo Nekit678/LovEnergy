@@ -57,3 +57,14 @@ export interface ProfileInfoProps {
 export interface PhotoLineProps {
     photoURLs: string[]
 }
+
+
+export interface PostProps{
+    img:string,
+    text:string,
+    name:string,
+    lastname:string,
+    likes:number,
+    dislikes:number,
+    mark:"like" | "dislike" | "nomark"
+}
