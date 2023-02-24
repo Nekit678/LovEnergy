@@ -39,3 +39,30 @@ export interface AutoData {
 }
 
 // //////////////////////////////////////////////////////////
+
+export interface getPostsRequest {
+    page: number,
+    profile_id: number
+}
+
+export interface PostData {
+    id: number,
+    img: string,
+    text: string,
+    name: string,
+    lastname: string,
+    likes: number,
+    dislikes: number,
+    mark: "nomark" | "liked" | "disliked"
+}
+
+export interface getPostsData{
+    posts:PostData[]
+    totalCount:number
+}
+
+
+export interface sendPostRequest{
+    text:string,
+    profileId:number
+}

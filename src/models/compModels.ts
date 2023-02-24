@@ -66,5 +66,5 @@ export interface PostProps{
     lastname:string,
     likes:number,
     dislikes:number,
-    mark:"like" | "dislike" | "nomark"
+    mark:"liked" | "disliked" | "nomark"
 }

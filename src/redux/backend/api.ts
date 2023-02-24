@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { AuthMeData, RegRequest, ServerResponse, RegData, AutoData, AutoRequest } from './../../models/models';
+import { AuthMeData, RegRequest, ServerResponse, RegData, AutoData, AutoRequest, getPostsRequest, PostData, getPostsData, sendPostRequest } from './../../models/models';
 
 
 export const serverApi = createApi({
@@ -7,7 +7,7 @@ export const serverApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: "http://localhost:5000/"
     }),
-    tagTypes:["Auth"],
+    tagTypes: ["Auth"],
     endpoints: build => ({
         authMe: build.query<ServerResponse<AuthMeData>, null>({
             query: () => ({
@@ -15,21 +15,33 @@ export const serverApi = createApi({
                 credentials: "include"
             })
         }),
-        
-        registration: build.mutation<ServerResponse<RegData>, RegRequest>({
-            query: (data)=>({
-                url: "Registration",
-                method: 'POST',
-                body:data,
+        getPosts: build.query<ServerResponse<getPostsData>, getPostsRequest>({
+            query: ({page,profile_id}) => ({
+                url: `getPosts?id=${profile_id}&page=${page}`,
                 credentials: "include"
             })
         }),
-
+        registration: build.mutation<ServerResponse<RegData>, RegRequest>({
+            query: (data) => ({
+                url: "Registration",
+                method: 'POST',
+                body: data,
+                credentials: "include"
+            })
+        }),
+        sendPost: build.mutation<ServerResponse<PostData>, sendPostRequest>({
+            query: (data) => ({
+                url: "/sendPost",
+                method: 'PUT',
+                body: data,
+                credentials: "include"
+            })
+        }),
         autorisation: build.mutation<ServerResponse<AutoData>, AutoRequest>({
-            query: (data)=>({
+            query: (data) => ({
                 url: "Autorisation",
                 method: 'POST',
-                body:data,
+                body: data,
                 credentials: "include"
             })
         }),
@@ -44,4 +56,4 @@ export const serverApi = createApi({
 })
 
 
-export const { useAuthMeQuery, useLogoutMutation, useRegistrationMutation, useAutorisationMutation } = serverApi
+export const { useAuthMeQuery, useGetPostsQuery, useSendPostMutation, useLogoutMutation, useRegistrationMutation, useAutorisationMutation } = serverApi
